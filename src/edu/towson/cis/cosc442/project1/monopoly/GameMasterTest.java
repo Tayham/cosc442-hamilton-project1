@@ -4,10 +4,18 @@ import java.util.ArrayList;
 
 import junit.framework.TestCase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GameMasterTest.
+ */
 public class GameMasterTest extends TestCase {
 
+	/** The game master. */
 	GameMaster gameMaster;
 	
+	/* (non-Javadoc)
+	 * @see junit.framework.TestCase#setUp()
+	 */
 	protected void setUp() throws Exception {
 		gameMaster = GameMaster.instance();
 		gameMaster.setGameBoard(new GameBoardFull());
@@ -20,11 +28,17 @@ public class GameMasterTest extends TestCase {
         gameMaster.startGame();
 	}
 	
+	/**
+	 * Test init.
+	 */
 	public void testInit() {
 		assertEquals(gameMaster.getInitAmountOfMoney(),
 				gameMaster.getPlayer(0).getMoney());
 	}
 	
+	/**
+	 * Test reset.
+	 */
 	public void testReset() {
 		gameMaster.movePlayer(0, 3);
 		gameMaster.movePlayer(1, 4);
@@ -36,6 +50,9 @@ public class GameMasterTest extends TestCase {
 		assertEquals(0, gameMaster.getTurn());
 	}
     
+    /**
+     * Test trade process.
+     */
     public void testTradeProcess() {
         MonopolyGUI gui = gameMaster.getGUI();
         assertTrue(gui.isTradeButtonEnabled(0));
@@ -62,6 +79,9 @@ public class GameMasterTest extends TestCase {
         assertTrue(player2.checkProperty(deal.getPropertyName()));
     }
 	
+	/**
+	 * Test turn.
+	 */
 	public void testTurn() {
 		assertEquals(0, gameMaster.getTurn());
 		gameMaster.switchTurn();
@@ -70,6 +90,9 @@ public class GameMasterTest extends TestCase {
 		assertEquals(0, gameMaster.getTurn());
 	}
 	
+	/**
+	 * Test button get out of jail clicked.
+	 */
 	public void testButtonGetOutOfJailClicked() {
 		MonopolyGUI gui = gameMaster.getGUI();
 		movePlayerAndEndTurn(0,30);
@@ -82,11 +105,20 @@ public class GameMasterTest extends TestCase {
 		assertEquals(1450,gameMaster.getPlayer(0).getMoney());
 	}
 
+	/**
+	 * Move player and end turn.
+	 *
+	 * @param playerIndex the player index
+	 * @param diceValue the dice value
+	 */
 	private void movePlayerAndEndTurn(int playerIndex, int diceValue) {
 		gameMaster.movePlayer(playerIndex , diceValue);
 		gameMaster.btnEndTurnClicked();
 	}
 	
+	/**
+	 * Test button purchase property clicked.
+	 */
 	public void testButtonPurchasePropertyClicked() {
 		@SuppressWarnings("unused")
 		MonopolyGUI gui = gameMaster.getGUI();
@@ -96,6 +128,9 @@ public class GameMasterTest extends TestCase {
 		assertEquals(1440,gameMaster.getCurrentPlayer().getMoney());
 	}
 	
+	/**
+	 * Test button roll dice clicked.
+	 */
 	public void testButtonRollDiceClicked() {
 		gameMaster.reset();
 		gameMaster.getGUI();
@@ -104,6 +139,9 @@ public class GameMasterTest extends TestCase {
 		assertEquals(gameMaster.getGameBoard().getCell(5), gameMaster.getPlayer(0).getPosition());
 	}
 	
+	/**
+	 * Test button trade clicked.
+	 */
 	public void testButtonTradeClicked() {
 		gameMaster.getGUI();
 		gameMaster.movePlayer(0,1);
