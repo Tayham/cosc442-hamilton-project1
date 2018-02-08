@@ -72,16 +72,19 @@ public class GameMasterTest extends TestCase {
 	
 	public void testButtonGetOutOfJailClicked() {
 		MonopolyGUI gui = gameMaster.getGUI();
-		gameMaster.movePlayer(0,30);
-		gameMaster.btnEndTurnClicked();
+		movePlayerAndEndTurn(0,30);
 		assertEquals("Jail", gameMaster.getPlayer(0).getPosition().getName());
-		gameMaster.movePlayer(1,2);
-		gameMaster.btnEndTurnClicked();
+		movePlayerAndEndTurn(1,2);
 		assertTrue(gui.isGetOutOfJailButtonEnabled());
 		assertTrue(gameMaster.getPlayer(0).isInJail());
 		gameMaster.btnGetOutOfJailClicked();
 		assertFalse(gameMaster.getPlayer(0).isInJail());
 		assertEquals(1450,gameMaster.getPlayer(0).getMoney());
+	}
+
+	private void movePlayerAndEndTurn(int playerIndex, int diceValue) {
+		gameMaster.movePlayer(playerIndex , diceValue);
+		gameMaster.btnEndTurnClicked();
 	}
 	
 	public void testButtonPurchasePropertyClicked() {

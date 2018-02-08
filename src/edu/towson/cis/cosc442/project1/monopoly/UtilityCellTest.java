@@ -6,11 +6,19 @@ public class UtilityCellTest extends TestCase {
 	GameMaster gameMaster;
 	
 	protected void setUp() {
-		gameMaster = GameMaster.instance();
-		gameMaster.setGameBoard(new GameBoardUtility());
+		initGameMaster();
 		gameMaster.setNumberOfPlayers(2);
+		resetAndSetGUI();
+	}
+
+	private void resetAndSetGUI() {
 		gameMaster.reset();
 		gameMaster.setGUI(new MockGUI());
+	}
+
+	private void initGameMaster() {
+		gameMaster = GameMaster.instance();
+		gameMaster.setGameBoard(new GameBoardUtility());
 	}
     
     public void testMonopoly() {
